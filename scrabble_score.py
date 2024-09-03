@@ -1,6 +1,5 @@
 import time
 import random
-import threading
 import nltk
 from nltk.corpus import words
 
@@ -41,32 +40,19 @@ def validate_word(word, required_length):
 def is_valid_word(word):
     return word.lower() in WORD_LIST
 
-# Function to display a countdown timer
-def countdown_timer(seconds):
-    while seconds:
-        mins, secs = divmod(seconds, 60)
-        timer = f'{mins:02d}:{secs:02d}'
-        print(f"\rTime left: {timer}\n", end="")
-        time.sleep(1)
-        print("\033[F", end="")  # Move cursor up to keep input on the second line
-        seconds -= 1
-    print("\rTime left: 00:00\n", end="")
-
 # Main game loop
 def game_loop():
     total_score = 0
     rounds = 10
     while rounds > 0:
         required_length = get_word_length()
-        print(f"\nPlease enter a word of length {required_length}: ")
+        print(f"Please enter a word of length {required_length}: ")
         
-        # Start timer in a separate thread
-        timer_thread = threading.Thread(target=countdown_timer, args=(15,))
-        timer_thread.start()
-        
-        # Capture user input
+        # Start timer
         start_time = time.time()
-        word = input("\n")  # Ensure the input appears on a separate line
+        
+        # User input
+        word = input()
         
         # Calculate elapsed time
         elapsed_time = time.time() - start_time
