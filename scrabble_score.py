@@ -1,14 +1,28 @@
-import time
+import time 
 import random
 import nltk
 from nltk.corpus import words
 
-# Ensure the NLTK words corpus is downloaded
+"""
+
+Calculate the Scrabble score for a given word.
+Args:
+    word (str): The word to calculate the score for.
+Returns:
+    int: The total score of the word.
+Raises:
+    ValueError: If the word contains non-alphabetic characters.
+"""
+
+
+# Ensure the NLTK (Natural Language Toolkit library) words corpus is downloaded 
 nltk.download('words')
 
-# Load the word list from NLTK
+# Load the word list from NLTK 
 WORD_LIST = set(words.words())
 
+
+# Dictionary of letter values for Scrabble
 LETTER_VALUES = {
     'A': 1, 'E': 1, 'I': 1, 'O': 1, 'U': 1, 'L': 1, 'N': 1, 'R': 1, 'S': 1, 'T': 1,
     'D': 2, 'G': 2,
@@ -19,31 +33,31 @@ LETTER_VALUES = {
     'Q': 10, 'Z': 10
 }
 
-# Function to calculate Scrabble score
+# Calculate Scrabble score
 def scrabble_score(word):
-    word = word.upper()
+    word = word.upper() # Requirment 2 - Case insensitive
     if not word.isalpha():
-        raise ValueError("Word must only contain alphabetic characters.")
-    return sum(LETTER_VALUES[char] for char in word)
+        raise ValueError("Word must only contain alphabetic characters.") # Requirment 3 - Only alphabetic characters
+    return sum(LETTER_VALUES[char] for char in word) # Requirment 1 - Calculate the score
 
-# Function to get the required word length
+# Get the required word length
 def get_word_length():
     return random.randint(3, 7)
 
-# Function to validate the word length
+# Validate the word length
 def validate_word(word, required_length):
     if len(word) != required_length:
         raise ValueError(f"Word must be {required_length} characters long.")
     return word
 
-# Function to check if the word is valid using NLTK dictionary
+# Requirment 5 - check if the word is valid using NLTK dictionary
 def is_valid_word(word):
     return word.lower() in WORD_LIST
 
-# Main game loop
+# Main loop
 def game_loop():
     total_score = 0
-    rounds = 10
+    rounds = 10 # Requirment 6 - 10 rounds
     while rounds > 0:
         required_length = get_word_length()
         print(f"Please enter a word of length {required_length}: ")
@@ -54,7 +68,7 @@ def game_loop():
         # User input
         word = input()
         
-        # Calculate elapsed time
+        # Requirment 4  - Calculate elapsed time 
         elapsed_time = time.time() - start_time
         if elapsed_time > 15:
             print("Time's up! You took too long.")
@@ -82,10 +96,10 @@ def game_loop():
             continue
         
         rounds -= 1
-        if input("Continue (y/n)? ").lower() != 'y':
+        if input("Continue (y/n)? ").lower() != 'y': # Requirment 6 - User can quit
             break
     
     print(f"Final score: {total_score:.2f}")
 
-if __name__ == "__main__":
+if __name__ == "__main__": # Run the game loop
     game_loop()
