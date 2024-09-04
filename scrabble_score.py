@@ -1,18 +1,8 @@
+"""Module to calculate the Scrabble score for a given word."""
 import time
 import random
 import nltk
 from nltk.corpus import words
-
-"""
-
-Calculate the Scrabble score for a given word.
-Args:
-    word (str): The word to calculate the score for.
-Returns:
-    int: The total score of the word.
-Raises:
-    ValueError: If the word contains non-alphabetic characters.
-"""
 
 
 # Ensure the NLTK (Natural Language Toolkit library) words corpus is downloaded
@@ -37,6 +27,7 @@ LETTER_VALUES = {
 
 
 def scrabble_score(word):
+    """Function to calculate the Scrabble score for a given word."""
     # Requirement 2 - Case insensitive
 
     word = word.upper()
@@ -52,12 +43,14 @@ def scrabble_score(word):
 
 
 def get_word_length():
+    """Function to return a random word length between 3 and 7."""
     return random.randint(3, 7)
 
 # Validate the word length
 
 
 def validate_word(word, required_length):
+    """Function to validate the word length."""
     if len(word) != required_length:
         raise ValueError(f"Word must be {required_length} characters long.")
     return word
@@ -65,11 +58,13 @@ def validate_word(word, required_length):
 
 # Requirment 5 - check if the word is valid using NLTK dictionary
 def is_valid_word(word):
+    """Function to check if a word is valid using the NLTK word list."""
     return word.lower() in WORD_LIST
 
 
 # Main loop
 def game_loop():
+    """Main game loop for the Scrabble score game."""
     total_score = 0
     rounds = 10  # Requirment 6 - 10 rounds
     while rounds > 0:
