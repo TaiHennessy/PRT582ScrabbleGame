@@ -69,7 +69,7 @@ def game_loop():
     rounds = 10  # Requirment 6 - 10 rounds
     while rounds > 0:
         required_length = get_word_length()
-        print(f"Please enter a word of length {required_length}: ")
+        print(f"You have 15 seconds, Please enter a word of length {required_length}: ")
 
         # Start timer
         start_time = time.time()

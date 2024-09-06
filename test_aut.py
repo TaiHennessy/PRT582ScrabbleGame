@@ -1,5 +1,6 @@
 import unittest
-from scrabble_score import scrabble_score, get_word_length, validate_word, is_valid_word
+from unittest.mock import patch
+from scrabble_score import scrabble_score, get_word_length, validate_word, is_valid_word, game_loop
 
 class TestScrabbleScore(unittest.TestCase):
     def test_valid_word(self):
@@ -37,6 +38,17 @@ class TestIsValidWord(unittest.TestCase):
 
     def test_invalid_word(self):
         self.assertFalse(is_valid_word('qwerty'), "'qwerty' is not a valid word")
+
+class TestNTLK(unittest.TestCase):
+    def test_nltk(self):
+        try:
+            import nltk
+            nltk.data.find('corpora/words.zip')
+        except LookupError:
+            self.fail("NLTK words corpus not found.")
+
+
+
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)
